@@ -3,40 +3,40 @@ package com.infy.stack;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class IntegerStack implements Stack<Integer> {
-	int[] intStack;
+public class StringStack implements Stack<String> {
+	String[] strStack;
 	int index = -1;
+	
 	@Override
-	public String push(Integer t) {
+	public String push(String t) {
 		if(!isFull()) {
-			intStack[++index] = t;
+			strStack[++index] = t;
 			return "Item inserted";
 		}else {
 			return "Item has not been inserted, stack is full";
 		}
-		
 	}
 	@Override
-	public Integer pop() {
-		int item = -1;
+	public String pop() {
+		String item = null;
 		if(!isEmpty()) {
-			item = intStack[index];
-			intStack[index--] = 0;
+			item = strStack[index];
+			strStack[index--] = null;
 		}
 		return item;
 	}
 	@Override
-	public Integer top() {
+	public String top() {
 		if(!isEmpty()) {
-			return intStack[index];
+			return strStack[index];
 		}
-		return -1;
+		return null;
 	}
 	@Override
 	public void retrieve() {
 		if(!isEmpty()) {
 			System.out.print("Stack elements are: ");
-			Arrays.stream(intStack).forEach(num -> System.out.print(num+" "));
+			Arrays.stream(strStack).forEach(num -> System.out.print(num+" "));
 			System.out.println();
 		}else {
 			System.out.println("Stack is not created");
@@ -48,19 +48,19 @@ public class IntegerStack implements Stack<Integer> {
 	}
 	@Override
 	public boolean isFull() {
-		return index < intStack.length-1 ? false : true;
+		return index < strStack.length-1 ? false : true;
 	}
 	@Override
 	public int size() {
-		return intStack.length;
+		return strStack.length;
 	}
 	
 	public static void main(String[] args) {
-		IntegerStack iStack = new IntegerStack();
+		StringStack sStack = new StringStack();
 		Scanner scan = new Scanner(System.in);
 		System.out.print("Enter size of the stack: ");
 		int size = scan.nextInt();
-		iStack.intStack = new int[size];
+		sStack.strStack = new String[size];
 		while(true) {
 			System.out.println("Select the operation :::");
 			System.out.println("1. Insert an element");
@@ -75,36 +75,36 @@ public class IntegerStack implements Stack<Integer> {
 			switch(opt) {
 				case 1:
 					System.out.print("Enter an element: ");
-					int element = scan.nextInt();
-					System.out.println(iStack.push(element));
+					String element = scan.nextLine();
+					System.out.println(sStack.push(element));
 					break;
 				case 2:
-					if(!iStack.isFull()) {
+					if(!sStack.isFull()) {
 						System.out.println("Stack if not full");
 					}else {
 						System.out.println("Yes! stack is full");
 					}
 					break;
 				case 3:
-					if(iStack.isEmpty()) {
+					if(sStack.isEmpty()) {
 						System.out.println("Stack is empty");
 					}else {
 						System.out.println("Stack is not an empty");
 					}
 					break;
 				case 4:
-					System.out.println("Size of the stack is: "+iStack.size());
+					System.out.println("Size of the stack is: "+sStack.size());
 					break;
 				case 5:
-					int item = iStack.pop();
+					String item = sStack.pop();
 					System.out.println("Poped the item form statck: "+item);
 					break;
 				case 6:
-					iStack.retrieve();
+					sStack.retrieve();
 					break;
 				case 7:
-					int value = iStack.top();
-					if(value == -1) {
+					String value = sStack.top();
+					if(value == null) {
 						System.out.println("Stack is empty");
 					}else {
 						System.out.println("Top value of the stack is: "+value);
@@ -126,5 +126,5 @@ public class IntegerStack implements Stack<Integer> {
 		}
 		
 	}
-
+	
 }
