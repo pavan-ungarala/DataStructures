@@ -36,7 +36,7 @@ public class StringStack implements Stack<String> {
 	public void retrieve() {
 		if(!isEmpty()) {
 			System.out.print("Stack elements are: ");
-			Arrays.stream(strStack).forEach(num -> System.out.print(num+" "));
+			Arrays.stream(strStack).forEach(str -> System.out.print(str+" "));
 			System.out.println();
 		}else {
 			System.out.println("Stack is not created");
@@ -75,7 +75,7 @@ public class StringStack implements Stack<String> {
 			switch(opt) {
 				case 1:
 					System.out.print("Enter an element: ");
-					String element = scan.nextLine();
+					String element = scan.next();
 					System.out.println(sStack.push(element));
 					break;
 				case 2:
