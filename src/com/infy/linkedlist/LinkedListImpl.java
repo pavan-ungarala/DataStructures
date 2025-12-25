@@ -29,8 +29,8 @@ public class LinkedListImpl implements LinkedList {
 		int count = 0;
 		while(current != null) {
 			count +=1;
-			if(current.getData() == data) {
-				return "Element "+data+" found at "+count+" node";
+			if(current.getData().equals(data)) {
+				return "Element "+data+" found at "+count+" node and the node object address is: "+current.hashCode();
 			}
 		}
 		return "Element not found in this linked list";
@@ -38,6 +38,10 @@ public class LinkedListImpl implements LinkedList {
 
 	@Override
 	public void getList() {
+		if(isEmpty()) {
+			System.out.println("List is empty");
+			return;
+		}
 		Node current = headNode;
 		while(current != null) {
 			System.out.print(current.getData()+"-->");
@@ -48,12 +52,18 @@ public class LinkedListImpl implements LinkedList {
 
 	@Override
 	public Object headElement() {
-		return headNode.getData();
+		if(!isEmpty()) {
+			return headNode.getData();
+		}
+		return "List is empty";
 	}
 
 	@Override
 	public Object tailElement() {
-		return tailNode.getData();
+		if(tailNode != null) {
+			return tailNode.getData();
+		}
+		return "List is empty";
 	}
 
 	@Override
@@ -74,11 +84,11 @@ public class LinkedListImpl implements LinkedList {
 		boolean flag = false;
 		while(current != null) {
 			count += 1;
-			if(current.getData() == data && count ==1) {
+			if(current.getData().equals(data) && count ==1) {
 				deleteHeadElement(data);
-			}else if(current.getData() == data && current.getNext() == null) {
+			}else if(current.getData().equals(data) && current.getNext() == null) {
 				deleteTailElement(data);
-			}else if(current.getData() == data) {
+			}else if(current.getData().equals(data)) {
 				Node temp = current;
 				currentNode = current.getNext();
 				previousNode.setNext(currentNode);
@@ -108,8 +118,26 @@ public class LinkedListImpl implements LinkedList {
 	}
 	
 	@Override
+	public void deleteList() {
+		if(isEmpty()) {
+			System.out.println("List is empty");
+			return;
+		}
+		Node current = headNode;
+		while(current != null) {
+			headNode = current.getNext();
+			current.setNext(null);
+			current = headNode;
+		}
+		if(isEmpty()) {
+			System.out.println("Entire list has been deleted");
+		}
+	}
+	
+	@Override
 	public boolean isEmpty() {
 		return headNode == null ? true : false;
 	}
+
 
 }
