@@ -10,5 +10,6 @@ public interface LinkedList<T> {
 	public void deleteElement(T data);
 	public void deleteHeadElement(T data);
 	public void deleteTailElement(T data);
+	public void deleteList();
 	public boolean isEmpty();
 }
